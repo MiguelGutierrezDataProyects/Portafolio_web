@@ -48,14 +48,20 @@ header nav ul li {
     height: 100%;
     padding: 0 1.5%;
     align-content: center;
-    transition-duration: 0.1s;
     box-sizing: border-box;
+
+    border-bottom-color: var(--primary-color-a);
+    border-bottom-width: 0vw;
+    border-bottom-style: solid;
+
+    transition-duration: 0.1s;
 }
 
 header nav ul li a {
     display: block;
     height: 100%;
     align-content: center;
+
     transition-duration: 0.1s;
 }
 
