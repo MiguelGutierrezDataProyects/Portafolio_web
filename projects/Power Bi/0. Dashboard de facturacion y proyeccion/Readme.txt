@@ -1,0 +1,2 @@
+Link al dashboard
+https://app.powerbi.com/view?r=eyJrIjoiZWY1MDk3YmUtNGU0ZC00YjcyLWE5NGQtMDRkMjJmZWNlNTc2IiwidCI6IjcxYjNjNmQ5LWJjOTMtNDE0My05MTZkLWQ4NzAxNTRmMWRhNSIsImMiOjR9
