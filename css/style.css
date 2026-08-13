@@ -1,38 +1,65 @@
-/* Modificadores generales de todas las paginas */
+/* ============================================================
+   Portafolio — Miguel Gutierrez
+   Paleta unificada: base oscura, superficie, un solo acento.
+   ============================================================ */
+
 :root {
-    --primary-color-a: #f1e40f;
-    --primary-color-b: rgb(51, 51, 51);
-    --text-color-a: #f1e40f;
-    --text-color-b: #ffffff;
-    --text-color-c: rgb(51, 51, 51);
+    /* Superficies */
+    --base:        #0F172A;   /* fondo principal (antes: gris #333)   */
+    --superficie:  #1E293B;   /* fondo alterno   (antes: amarillo)    */
+    --superficie-2:#273548;   /* tarjetas                             */
+    --linea:       #334155;   /* separadores                          */
+
+    /* Acento y texto */
+    --acento:      #38BDF8;
+    --acento-alt:  #7DD3FC;
+    --texto:       #E2E8F0;
+    --texto-2:     #94A3B8;
+
+    /* Alias de compatibilidad con las clases existentes */
+    --primary-color-a: var(--superficie);
+    --primary-color-b: var(--base);
+    --text-color-a:    var(--acento);
+    --text-color-b:    var(--texto);
+    --text-color-c:    var(--base);
+
+    --radio:  10px;
+    --radio-s: 6px;
 }
 
-@view-transition{
+@view-transition {
     navigation: auto;
 }
 
-::view-transition-group{
+::view-transition-group {
     animation-duration: 1.5s;
 }
 
 body {
-    width: 100vw;
-    height: 100vh;
-    font-family: Arial, sans-serif;
+    width: 100%;
+    min-height: 100vh;
+    background: var(--base);
+    color: var(--texto);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
     font-weight: normal;
-    font-size: 1.5vw;
-    padding: 0%;
-    margin: 0%;
+    font-size: clamp(15px, 1.15vw, 19px);
+    line-height: 1.65;
+    padding: 0;
+    margin: 0;
     box-sizing: border-box;
     overflow-x: hidden;
     position: relative;
 }
 
+/* ---------- Cabecera / navegación ---------- */
+
 header {
     width: 100%;
-    height: 4.5vw;
-    background: rgb(46, 46, 46);
-    color: var(--text-color-b);
+    height: clamp(52px, 4.5vw, 72px);
+    background: rgba(15, 23, 42, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--linea);
+    color: var(--texto);
     align-content: center;
     position: fixed;
     z-index: 2;
@@ -40,12 +67,7 @@ header {
     box-sizing: border-box;
 }
 
-header nav {
-    width: 100%;
-    height: 100%;
-    align-content: center;
-}
-
+header nav,
 header nav ul {
     width: 100%;
     height: 100%;
@@ -57,32 +79,27 @@ header nav ul li {
     padding: 0 1.5%;
     align-content: center;
     box-sizing: border-box;
-
-    border-bottom-color: var(--primary-color-a);
-    border-bottom-width: 0vw;
-    border-bottom-style: solid;
-
-    transition-duration: 0.1s;
+    border-bottom: 2px solid transparent;
+    transition-duration: 0.15s;
 }
 
 header nav ul li a {
     display: block;
     height: 100%;
     align-content: center;
-
-    transition-duration: 0.1s;
+    font-size: clamp(14px, 1.05vw, 17px);
+    transition-duration: 0.15s;
 }
 
-header nav ul li:hover {
-    border-bottom-color: var(--primary-color-a);
-    border-bottom-width: 0.4vw;
-    border-bottom-style: solid;
-    background: rgb(40, 40, 40);
-    box-shadow: inset 0 0 1vw rgba(40, 40, 40, 0.9);
+header nav ul li:hover,
+header nav ul li:has(a[aria-current="page"]) {
+    border-bottom-color: var(--acento);
+    background: rgba(56, 189, 248, 0.06);
 }
 
-header nav ul li:hover a {
-    color: var(--text-color-a);
+header nav ul li:hover a,
+header nav ul li a[aria-current="page"] {
+    color: var(--acento);
 }
 
 nav ul {
@@ -91,259 +108,395 @@ nav ul {
     justify-content: center;
     align-items: center;
     gap: 2vw;
-    padding: 0%;
-    margin: 0%;
+    padding: 0;
+    margin: 0;
     list-style: none;
+    flex-wrap: wrap;
 }
 
 nav a {
-    color: var(--text-color-b);
+    color: var(--texto);
     text-decoration: none;
 }
+
+/* ---------- Botones ---------- */
 
 .button {
     display: inline-block;
-    background: #007bff;
-    color: var(--text-color-b);
-    font-weight: bold;
-    padding: 1vw 2vw;
+    background: var(--acento);
+    color: var(--base);
+    font-weight: 700;
+    font-size: clamp(14px, 1vw, 16px);
+    padding: 0.7em 1.6em;
     text-decoration: none;
     border: none;
-    border-radius: 1vw;
-    transition-duration: 0.1s;
+    border-radius: var(--radio);
+    cursor: pointer;
+    transition-duration: 0.15s;
 }
 
 .button:hover {
-    background: #0056b3;
-    scale: 1.1;
+    background: var(--acento-alt);
+    transform: translateY(-2px);
 }
 
-.title_container_brown {
-    font-weight: bold;
-    font-size: 3vw;
-    color: var(--text-color-a);
-    margin: 0%;
-}
+/* ---------- Títulos y texto ---------- */
 
+.title_container_brown,
 .title_container_yellow {
-    font-weight: bold;
-    font-size: 3vw;
-    color: var(--text-color-c);
-    margin: 0%;
+    font-weight: 700;
+    font-size: clamp(26px, 2.6vw, 44px);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--acento);
+    margin: 0 0 0.6em;
 }
 
-.text_container_brown {
-    color: var(--text-color-b);
-}
-
+.text_container_brown,
 .text_container_yellow {
-    color: var(--text-color-c);
+    color: var(--texto-2);
+    margin: 0 auto 1em;
+    max-width: 70ch;
 }
 
-.container_brown {
-    width: 100%;
-    background: var(--text-color-c);
-    text-align: center;
-    border-bottom-color: var(--text-color-b);
-    border-bottom-width: 0.8vw;
-    border-bottom-style: solid;
-    padding: 7.5% 14%;
-    box-sizing: border-box;
-}    
+#hero .lead {
+    color: var(--texto);
+    font-size: clamp(17px, 1.5vw, 24px);
+    max-width: 60ch;
+}
 
+#hero .stack_line {
+    color: var(--texto-2);
+    font-size: clamp(13px, 0.95vw, 15px);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    margin-bottom: 2em;
+}
+
+/* ---------- Contenedores de sección ---------- */
+
+.container_brown,
 .container_yellow {
     width: 100%;
-    background: var(--primary-color-a);
     text-align: center;
-    border-bottom-color: var(--text-color-b);
-    border-bottom-width: 0.8vw;
-    border-bottom-style: solid;
-    padding: 7.5% 14%;
+    border-bottom: 1px solid var(--linea);
+    padding: clamp(48px, 6%, 110px) clamp(20px, 12%, 200px);
     box-sizing: border-box;
 }
+
+.container_brown { background: var(--base); }
+.container_yellow { background: var(--superficie); }
 
 #footer_all_pages {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 5vw;
-    padding: 0%;
+    height: auto;
+    padding: 1.6em 0;
     border: 0;
+    border-top: 1px solid var(--linea);
 }
 
 #footer_all_pages p {
     margin: 0;
+    font-size: clamp(13px, 0.95vw, 15px);
 }
 
-
-/* Modificadores de la pagina principal */
+/* ---------- Portada: foto ---------- */
 
 #imagen_inicial {
-    width: 25%;
+    width: clamp(120px, 12%, 180px);
+    aspect-ratio: 1;
+    object-fit: cover;
     border-radius: 100%;
-    margin-top: 4vw;
-    margin-bottom: 1vw;
+    border: 2px solid var(--linea);
+    margin-top: clamp(48px, 5vw, 90px);
+    margin-bottom: 1.4em;
 }
 
-.container_cat_proy {
+/* ---------- Proyectos destacados ---------- */
+
+.container_destacados {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: clamp(16px, 1.6vw, 26px);
+    margin-top: 2.4em;
+    text-align: left;
+}
+
+.caso {
+    background: var(--superficie-2);
+    border: 1px solid var(--linea);
+    border-radius: var(--radio);
+    overflow: hidden;
+    transition-duration: 0.15s;
+}
+
+.caso:hover {
+    border-color: var(--acento);
+    transform: translateY(-4px);
+}
+
+.caso a {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+
+.caso img {
+    width: 100%;
+    height: clamp(130px, 11vw, 190px);
+    object-fit: cover;
+    border-bottom: 1px solid var(--linea);
+}
+
+.caso h3 {
+    color: var(--texto);
+    font-size: clamp(16px, 1.25vw, 21px);
+    line-height: 1.3;
+    margin: 1.1em 1.2em 0.5em;
+}
+
+.caso .caso_res {
+    color: var(--texto-2);
+    font-size: clamp(13px, 0.95vw, 15px);
+    margin: 0 1.35em 1.1em;
+    flex-grow: 1;
+}
+
+.caso .caso_res b { color: var(--acento); font-weight: 600; }
+
+.caso .caso_stack {
+    color: var(--texto-2);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: clamp(11px, 0.8vw, 13px);
+    margin: 0 1.55em 1.3em;
+    padding-top: 0.9em;
+    border-top: 1px solid var(--linea);
+}
+
+/* ---------- Tarjetas de categoría ---------- */
+
+.container_cat_proy {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: clamp(16px, 1.6vw, 26px);
+    margin-top: 2em;
 }
 
 .container_cat_proy article {
-    width: 45%;
-    border-radius: 3vw;
-    background: var(--text-color-b);
-    transition-duration: 0.1s;
+    background: var(--superficie-2);
+    border: 1px solid var(--linea);
+    border-radius: var(--radio);
+    transition-duration: 0.15s;
 }
 
 .container_cat_proy article:hover {
-    box-shadow: inset 0 0 3vw rgba(0, 0, 0, 0.4);
-    transform: scale(1.02);
+    border-color: var(--acento);
+    transform: translateY(-4px);
 }
 
 .container_cat_proy article a {
     display: block;
     width: 100%;
     height: 100%;
-    padding: 10% 12%;
+    padding: 2.2em 2em;
     box-sizing: border-box;
     text-decoration: none;
 }
 
 .container_cat_proy article a img {
-    width: 50%;
+    width: clamp(56px, 26%, 96px);
     box-sizing: border-box;
 }
 
 .container_cat_proy article a h3 {
-    margin-bottom: 0.9vw;
+    color: var(--texto);
+    font-size: clamp(16px, 1.25vw, 21px);
+    margin: 0.9em 0 0.5em;
 }
 
 .container_cat_proy article a p {
-    margin: 0%;
-    font-size: 1.3vw;
+    color: var(--texto-2);
+    margin: 0;
+    font-size: clamp(13px, 0.95vw, 15px);
 }
 
+/* ---------- Formulario ---------- */
+
 form fieldset {
-    padding: 1.5% 10% 3% 10%;
-    margin: 0%;
+    padding: 0;
+    margin: 0 auto;
     border: none;
+    max-width: 620px;
 }
 
 form fieldset label {
     width: 100%;
     display: flex;
     flex-direction: column;
-    font-weight: bold;
-    align-items: center;
-    /* text-align: left; */
+    font-weight: 600;
+    color: var(--texto);
+    align-items: flex-start;
+    text-align: left;
+    margin-bottom: 1.2em;
+    font-size: clamp(14px, 1vw, 16px);
 }
 
-form fieldset label:nth-child(2) {
-    margin: 1.5vw 0%;
-}
-
-form fieldset label input {
+form fieldset label input,
+form fieldset label textarea {
     width: 100%;
-    height: 3.5vw;
-    margin-top: 1vw;
-    border: var(--text-color-c) solid 0.16vw;
-    border-radius: 1.75vw;
-    padding: 0 3vw;
+    margin-top: 0.55em;
+    background: var(--superficie-2);
+    color: var(--texto);
+    border: 1px solid var(--linea);
+    border-radius: var(--radio-s);
+    padding: 0.85em 1em;
+    font-family: inherit;
+    font-size: clamp(14px, 1vw, 16px);
     box-sizing: border-box;
+    transition-duration: 0.15s;
 }
 
-form fieldset label:nth-child(3) input {
-    height: 8vw;
-}
-    
+form fieldset label input { height: auto; }
 
-/* Modificadores de las paginas de proyectos de python y power bi */
+form fieldset label textarea {
+    resize: vertical;
+    min-height: 7em;
+}
+
+form fieldset label input:focus,
+form fieldset label textarea:focus {
+    outline: none;
+    border-color: var(--acento);
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+}
+
+form input[type="submit"] {
+    margin-top: 0.4em;
+}
+
+/* ---------- Páginas de proyectos ---------- */
 
 #hero_projects {
-    margin-top: 4.5vw;
+    margin-top: clamp(52px, 4.5vw, 72px);
 }
 
 .container_projects {
     display: flex;
-    height: 43vw;
+    height: auto;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 5vw;
+    gap: clamp(24px, 4vw, 64px);
+    text-align: left;
 }
 
 .container_image {
     display: flex;
     width: 50%;
-    height: 100%;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
     overflow: hidden;
-    border-radius: 2vw;
+    border-radius: var(--radio);
+    border: 1px solid var(--linea);
 }
 
 .container_image img {
-    height: 100%;
+    width: 100%;
+    height: clamp(200px, 24vw, 380px);
+    object-fit: cover;
 }
 
 .container_text {
     display: flex;
     flex-direction: column;
     width: 50%;
-    height: 100%;
     box-sizing: border-box;
     justify-content: center;
     align-items: start;
     text-align: start;
 }
 
+.container_text .text_container_brown,
+.container_text .text_container_yellow {
+    margin-left: 0;
+    margin-right: 0;
+}
+
 .container_text ul {
     text-align: left;
-    margin: 0;
-    padding: 0 5%;
+    color: var(--texto-2);
+    margin: 0 0 1.2em;
+    padding: 0 0 0 1.2em;
 }
 
 .container_text .button {
-    width: 30%;
+    width: auto;
     text-align: center;
 }
 
 .container_text .title_projects {
-    font-size: 2.75vw;
+    font-size: clamp(20px, 1.9vw, 32px);
+    text-align: left;
 }
 
 .image_projects img {
     width: 100%;
 }
 
-/* Modificadores de las paginas de proyectos con jupiter notebooks */
-
+/* ---------- Páginas con notebooks ---------- */
 
 #hero_projects_iframe {
-    margin-top: 3vw;
+    margin-top: clamp(52px, 4.5vw, 72px);
 }
 
 .container_projects_iframe {
     display: flex;
-    height: 45vw;
+    height: auto;
+    min-height: 80vh;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2vw;
-    padding: 3.5% 14%;
-    margin-top: 4vw;
+    gap: 1.6em;
+    padding: clamp(32px, 3.5%, 70px) clamp(16px, 8%, 160px);
+    margin-top: clamp(52px, 4.5vw, 72px);
 }
 
 .container_projects_iframe h1 {
-    font-size: 1.8vw;
+    font-size: clamp(18px, 1.7vw, 28px);
 }
 
 .container_projects_iframe iframe {
     width: 100%;
-    height: 100%;
-    font-size: 2vw;
-    border-radius: 1.75vw;
+    height: 75vh;
+    background: #ffffff;
+    border: 1px solid var(--linea);
+    border-radius: var(--radio);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 820px) {
+    .container_projects {
+        flex-direction: column;
+    }
+
+    .container_image,
+    .container_text {
+        width: 100%;
+    }
+
+    .container_text .title_projects {
+        font-size: clamp(20px, 5vw, 28px);
+    }
+
+    .title_container_brown,
+    .title_container_yellow {
+        font-size: clamp(24px, 6vw, 34px);
+    }
+
+    nav ul { gap: 4vw; }
 }
