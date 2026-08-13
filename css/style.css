@@ -140,6 +140,29 @@ nav a {
     transform: translateY(-2px);
 }
 
+/* Botón secundario: misma jerarquía visual, menos peso */
+.button.secundario {
+    background: transparent;
+    color: var(--acento);
+    border: 1px solid var(--acento);
+    padding: calc(0.7em - 1px) calc(1.6em - 1px);
+}
+
+.button.secundario:hover {
+    background: rgba(56, 189, 248, 0.10);
+    border-color: var(--acento-alt);
+    color: var(--acento-alt);
+}
+
+/* Grupo de acciones: en fila, con aire entre botones */
+.acciones {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75em;
+    margin-top: 0.5em;
+}
+
 /* ---------- Títulos y texto ---------- */
 
 .title_container_brown,
@@ -381,6 +404,21 @@ form input[type="submit"] {
 
 #hero_projects {
     margin-top: clamp(52px, 4.5vw, 72px);
+}
+
+/* El logo de la portada de cada categoría es un logo, no una foto:
+   se contiene entero, no se recorta. */
+#hero_projects .container_image {
+    background: var(--superficie-2);
+    padding: clamp(28px, 3.5vw, 56px);
+    box-sizing: border-box;
+}
+
+#hero_projects .container_image img {
+    width: auto;
+    max-width: 100%;
+    height: clamp(120px, 14vw, 200px);
+    object-fit: contain;
 }
 
 .container_projects {
